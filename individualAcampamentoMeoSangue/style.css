@@ -1,0 +1,301 @@
+/* FONTES */
+/* poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,800;1,900&display=swap');
+
+/* garamond */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,800;1,900&display=swap');
+
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'garamond', sans-serif;
+  scroll-behavior: smooth;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--fuschia);
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--void);
+}
+
+/* VARIAVEIS CORES */
+:root {
+  --void: #392116;
+  --void2: #531dd9;
+  --fuschia: #fa991b;
+  --jewel: #531dd9;
+  --stark: #e9e2e2;
+}
+
+content {
+  width: 100%;
+  height: 100%;
+  
+}
+
+.container {
+  width: 80%;
+  margin-left: 10%;
+}
+
+#header {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: transparent;
+  position: fixed;
+  z-index: 100;
+  color: var(--stark);
+  transition: 0.7s;
+}
+
+#header .title {
+  font-weight: 600;
+  font-size: 32px;
+}
+
+#header span {
+  color: var(--fuschia);
+}
+
+.navLista {
+  display: flex;
+  justify-content: space-around;
+  font-weight: 400;
+  padding: 0;
+  width: 200px;
+  list-style-type: none;
+}
+.navLista a {
+  text-decoration: none;
+  color: var(--stark);
+}
+
+.caLogin {
+  display: flex;
+  justify-content: space-between;
+  width: 100px;
+}
+
+.banner {
+  background-image: url('assets/img/Mitologia-Grega-131-Estalagem-Nerd-CAPA.jpg');
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+.mouseScroll {
+  position: relative;
+  top: 180px;
+  left: 210px;
+}
+.mouseScroll img {
+  height: 40px;
+  animation: float 6s ease-in-out infinite;
+}
+
+.text1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 450px;
+  color: var(--stark);
+  text-shadow: 0 1px var(--void);
+}
+
+.text1 h1 {
+  font-size: 40px;
+}
+
+.text1 .paragraph {
+  margin-top: 0.7em;
+  border-right: 0.15em solid var(--void);
+  font-size: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.text1 p {
+  width: 9.5rem;
+  animation: type 4s steps(40, end);
+  animation-fill-mode: forwards;
+  font-style: italic;
+}
+
+@keyframes type {
+  0% {
+    width: 0;
+  }
+  99.9% {
+    border-right: 0.15em solid var(--fuschia);
+  }
+  100% {
+    border: none;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translatey(0);
+  }
+
+  50% {
+    transform: translatey(-10px);
+  }
+}
+
+/* @-webkit-keyframes type {
+  0% {
+    width: 0;
+  }
+  99.9% {
+    border-right: 0.15em solid orange;
+  }
+  100% {
+    border: none;
+  }
+} */
+
+/* CONTEUDO 2 */
+
+.content2 {
+  min-height: 100vh;
+  background: var(--void);
+  background-size: cover;
+}
+
+.content2 .imgBox {
+  width: 80%;
+  margin-left: 10%;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+}
+
+.content2 .imgBox img {
+  max-width: 150px;
+}
+
+.escrito1 {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 50px;
+}
+
+.escrito1 .title {
+  color: var(--stark);
+  width: 350px;
+  font-size: 36px;
+}
+.escrito1 .title span {
+  color: var(--fuschia);
+}
+
+.imgBox2 {
+  margin-top: 100px;
+  display: flex;
+  justify-content: space-between;
+}
+.hog img {
+  height: 300px;
+  border-radius: 5px;
+}
+
+.escrito2 p {
+  width: 300px;
+  color: var(--stark);
+  font-size: 26px;
+}
+.escrito2 p span {
+  color: var(--fuschia);
+  font-weight: 600;
+}
+
+.content3 {
+  min-height: 100vh;
+  background-color: var(--void);
+  display: flex;
+}
+
+.imgBox3 {
+  margin-top: 200px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.escrito3 p {
+  width: 320px;
+  color: var(--stark);
+  font-size: 26px;
+}
+.escrito3 p span {
+  color: var(--fuschia);
+  font-weight: 600;
+}
+
+.leitura img {
+  height: 350px;
+  border-radius: 5px;
+}
+
+/* SWIPER1*/
+
+.swiper {
+  margin-top: 25px;
+  width: 90%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 300px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+}
+
+/* SWIPER2*/
+
+.swiper2 {
+  width: 240px;
+  height: 320px;
+  background-color: #4717f6;
+}
+
+.swiper-slide2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #fff;
+}
+
+#header.scroll {
+  background-color: var(--void2);
+}
+
+.footer {
+  width: 100%;
+  height: 5rem;
+  background-color: var(--jewel);
+  color: white;
+  text-align: center;
+}
