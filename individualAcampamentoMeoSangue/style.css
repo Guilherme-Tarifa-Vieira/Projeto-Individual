@@ -33,7 +33,7 @@
 /* VARIAVEIS CORES */
 :root {
   --void: #392116;
-  --void2: #531dd9;
+  --void2: #2e3cd9;
   --fuschia: #fa991b;
   --jewel: #531dd9;
   --stark: #e9e2e2;
@@ -42,7 +42,6 @@
 content {
   width: 100%;
   height: 100%;
-  
 }
 
 .container {
@@ -96,14 +95,16 @@ content {
   min-height: 100vh;
   display: flex;
   justify-content: center;
+  /* filter: brightness(50%); */
 }
+
 .mouseScroll {
   position: relative;
-  top: 180px;
+  top: 150px;
   left: 210px;
 }
 .mouseScroll img {
-  height: 40px;
+  height: 35px;
   animation: float 6s ease-in-out infinite;
 }
 
@@ -113,7 +114,7 @@ content {
   justify-content: center;
   width: 450px;
   color: var(--stark);
-  text-shadow: 0 1px var(--void);
+  text-shadow: 1px 1.5px black;
 }
 
 .text1 h1 {
@@ -129,7 +130,7 @@ content {
 }
 
 .text1 p {
-  width: 9.5rem;
+  width: 15rem;
   animation: type 4s steps(40, end);
   animation-fill-mode: forwards;
   font-style: italic;
@@ -270,9 +271,13 @@ content {
   justify-content: center;
 }
 
+.swiper-slide img {
+  border-radius: 5px;
+}
+
 /* SWIPER2*/
 
-.swiper2 {
+/* .swiper2 {
   width: 240px;
   height: 320px;
   background-color: #4717f6;
@@ -286,7 +291,7 @@ content {
   font-size: 22px;
   font-weight: bold;
   color: #fff;
-}
+} */
 
 #header.scroll {
   background-color: var(--void2);
@@ -295,7 +300,10 @@ content {
 .footer {
   width: 100%;
   height: 5rem;
-  background-color: var(--jewel);
+  background-color: var(--void2);
   color: white;
-  text-align: center;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

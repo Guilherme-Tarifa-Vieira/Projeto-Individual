@@ -14,24 +14,16 @@ window.addEventListener('scroll', function () {
 
 var swiper = new Swiper('.mySwiper', {
   effect: 'coverflow',
-  grabCursor: false,
+  grabCursor: true,
   centeredSlides: true,
   slidesPerView: '4',
   coverflowEffect: {
     rotate: 0,
     stretch: 0,
-    depth: 200,
+    depth: 100,
     modifier: 1,
     slideShadows: false
   },
-  pagination: { el: '.swiper-pagination', clickable: false },
-  autoplay: {
-    delay: 5000,
-    disableOnInteraction: true
-  },
-  keyboard: { enable: false },
-
-  navigation: { elnextEl: '.swiper-button-next' },
   loop: true
 })
 
