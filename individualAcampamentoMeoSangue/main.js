@@ -27,6 +27,8 @@ var swiper = new Swiper('.mySwiper', {
   loop: true
 })
 
+
+
 // var swiper1 = new Swiper1('.mySwiper', {
 //   speed: 600,
 //   parallax: true,
