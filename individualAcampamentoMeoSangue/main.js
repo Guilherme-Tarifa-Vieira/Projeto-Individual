@@ -24,10 +24,9 @@ var swiper = new Swiper('.mySwiper', {
     modifier: 1,
     slideShadows: false
   },
-  loop: true
+  loop: true,
+  Infinity: true
 })
-
-
 
 // var swiper1 = new Swiper1('.mySwiper', {
 //   speed: 600,

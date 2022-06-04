@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Acampamento meio-sangue</title>
+    <link rel="stylesheet" href="Cadastro.css" />
+    <link rel="icon" href="assets/img/trident-emblem-svgrepo-com.svg" type="image" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+
+</head>
+
+<body>
+    <div id="header">
+        <img style="height: 50px;"src="assets/img/logoHalf-removebg-preview.png">
+        <ul class="navLista">
+            <li><a href="index.html">Início</a></li>
+            <li><a href="descobrir.html">Descobrir</a></li>
+            
+        </ul>
+        <div class="caLogin">
+            <a class="btn-grad" href="login.html"><p>Login</p></a>
+            <a class="agora"href="cadastro.html"><p>Cadastro</p></a>
+        </div>
+    </div>
+    <div class="content">
+        <div class="banner"><div class="boxLogin">
+            
+         
+
+          <div class="card cadastro">
+            <div class="h2">
+              <h2>Faça seu cadastro agora mesmo!</h2>
+            <span>  <p>E faça a escolha de seu personagem favorito</p></span>
+            </div>
+            <form>
+              <label for="inputNome"></label>
+              <input placeholder="Nome" type="text" id="inputNomeFantasia" />
+              
+              <select class="selectPersonagens"id="personagens">
+                <option value="1">Percy Jackson</option>
+                <option value="2">Annabeth Chase</option>
+                <option value="3">Jason Grace</option>
+                <option value="4">Piper Mclean</option>
+                <option value="5">Hazel Levesque</option>
+                <option value="6">Leo Valdez</option>
+                <option value="7">Frank Zhang</option>
+            </select>
+            </form>
+           
+            <form>
+              <label for="inputEmail"></label>
+              <input placeholder="E-mail" type="email" id="inputEmail" />
+    
+              <label for="inputSenha"></label>
+              <input placeholder="Senha" type="password" id="inputSenha" />
+              <label for="inputConfirmarSenha"></label>
+              <input placeholder="Confirme sua senha" type="password" id="inputConfirmarSenha" />
+              <button onclick="cadastrar()" type="button">Cadastrar</button>
+            </form>
+            <div id="div_aguardar" class="loading-div">
+              <img src="./assets/circle-loading.gif" id="loading-gif" />
+            </div>
+            <div class="alerta_erro">
+              <div class="card_erro" id="cardErro">
+                <span id="mensagem_erro"></span>
+              </div>
+            </div>
+          </div>
+               
+            
+            
+        </div></div>
+        
+    </div>
+    <div class="footer">
+        <p>Desenvolvimento para web &hearts; </p>
+    </div>
+
+</body>
+
+</html>
+
+<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+<script src="main.js"></script>
+</body>
+
+</html>

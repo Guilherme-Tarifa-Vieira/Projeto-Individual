@@ -70,10 +70,6 @@
   font-size: 32px;
 }
 
-#header span {
-  color: var(--fuschia);
-}
-
 .navLista {
   display: flex;
   justify-content: space-around;
@@ -97,7 +93,6 @@
   text-align: center;
   margin-left: 5px;
   margin-top: 5px;
-  color: var(--stark);
   width: 200px;
 }
 
@@ -138,7 +133,7 @@
 }
 
 .banner {
-  background-image: url('assets/img/proclamado.jpg');
+  background-image: url('assets/img/nico.webp');
   background-size: cover;
   min-height: 100vh;
   min-width: 100vw;

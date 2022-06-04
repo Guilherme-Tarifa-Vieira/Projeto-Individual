@@ -14,20 +14,49 @@
 
 <body>
     <div id="header">
-        <h1 class="title">Meio<span>Sangue</span></h1>
+        <img style="height: 50px;"src="assets/img/logoHalf-removebg-preview.png">
         <ul class="navLista">
-            <li><a class="agora" href="#">Início</a></li>
+            <li><a href="index.html">Início</a></li>
             <li><a href="descobrir.html">Descobrir</a></li>
-            <li><a href="#">Livros</a></li>
+            
         </ul>
         <div class="caLogin">
-            <p>Login</p>
-            <p>Cadastro</p>
+            <a class="btn-grad" href="index.html"><p>Login</p></a>
+            <a href="cadastro.html"><p>Cadastro</p></a>
         </div>
     </div>
     <div class="content">
-        <div class="banner"></div>
-        <div class="boxLogin"></div>
+        <div class="banner"><div class="boxLogin">
+            
+                  
+                  <div class="card login">
+                    <div class="h2">
+                      <h2>Login</h2>
+                    </div>
+                    <form>
+                      <label for="inputEmail"></label>
+                      <input placeholder="E-mail" type="text" id="email_input" />
+                      <label for="inputSenha"></label>
+                      <input placeholder="Senha" type="password" id="senha_input" />
+                      <button onclick="entrar()" type="button">Entrar</button>
+                      <p>Não é membro? <a href="cadastro.html">Cadastre-se agora!</a></p>
+                    </form>
+                    <div id="div_aguardar" class="loading-div">
+                      <img src="./assets/circle-loading.gif" id="loading-gif" />
+                    </div>
+            
+                    <div id="div_erros_login"></div>
+                    <div class="alerta_erro">
+                      <div class="card_erro" id="cardErro">
+                        <span id="mensagem_erro"></span>
+                      </div>
+                    </div>
+                  </div>
+               
+            
+            
+        </div></div>
+        
     </div>
     <div class="footer">
         <p>Desenvolvimento para web &hearts; </p>

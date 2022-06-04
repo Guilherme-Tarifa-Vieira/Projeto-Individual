@@ -69,6 +69,10 @@
 #header span {
   color: var(--fuschia);
 }
+#header .caLogin a {
+  text-decoration: none;
+  color: var(--stark);
+}
 
 .navLista {
   display: flex;
@@ -93,7 +97,47 @@
   justify-content: space-between;
   width: 100px;
 }
+.caLogin .agora {
+  color: var(--fuschia);
+}
+.caLogin a {
+  text-decoration: none;
+}
+.caLogin a:nth-child(2) {
+  text-align: center;
+  margin-left: 5px;
+  margin-top: 5px;
+  color: var(--stark);
+}
 
+.btn-grad {
+  background-image: linear-gradient(
+    to right,
+    #f09819 0%,
+    #edde5d 51%,
+    #f09819 100%
+  );
+  font-family: 'garamond', sans-serif;
+}
+
+.btn-grad {
+  padding: 5px 5px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: #fff;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  display: block;
+  transition: 1s;
+}
+
+.btn-grad:hover {
+  background-position: right center;
+  color: var(--void);
+  text-decoration: none;
+}
 .banner {
   background-image: url('assets/img/1.png');
   background-size: cover;
@@ -162,7 +206,6 @@
 }
 
 @keyframes float {
-
   0%,
   100% {
     transform: translatey(0);
@@ -223,7 +266,6 @@
 }
 
 .imgBox2 {
-
   display: flex;
   justify-content: space-between;
 }
@@ -277,25 +319,20 @@
   border-radius: 5px;
 }
 
-
 .content4 {
   min-height: 70vh;
 
   background-size: cover;
   background-image: url(assets/img/2.png);
-
 }
-
-
 
 .content4.book {
   display: flex;
   justify-content: space-around;
-
 }
 
 .content4.book .container .imgBox2 .livros {
-  display:flex;
+  display: flex;
   justify-content: space-between;
 }
 
@@ -325,17 +362,13 @@
 
 .swiper-slide img {
   border-radius: 5px;
-  
 }
 
 .swiper-slide span.title {
   font-weight: 600;
-  color:var(--fuschia);
+  color: var(--fuschia);
   margin-top: 10px;
 }
-
-
-
 
 /* SWIPER2*/
 
