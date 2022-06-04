@@ -17,7 +17,6 @@
 /* width */
 ::-webkit-scrollbar {
   width: 12px;
-  
 }
 
 /* Handle */
@@ -33,9 +32,9 @@
 
 /* VARIAVEIS CORES */
 :root {
-  --void: #392116;
-  --void2: #2e3cd9;
-  --fuschia: #fa991b;
+  --void: #0d0625;
+  --void2: #1f0f53;
+  --fuschia: #f5c322;
   --jewel: #531dd9;
   --stark: #e9e2e2;
 }
@@ -43,7 +42,8 @@
 .content {
   width: 100%;
   min-height: 100vh;
-  background-color: var(--void);
+  background-image: url('assets/img/2.png');
+  background-size: cover;
   margin-top: 0px;
   padding: 5px;
 }
@@ -55,7 +55,7 @@
 
 #header {
   width: 100%;
-  
+
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -64,7 +64,7 @@
   z-index: 100;
   color: var(--stark);
   margin-bottom: 0px;
-  
+  transition: 1s;
 }
 
 #header .title {
@@ -89,6 +89,10 @@
   color: var(--stark);
 }
 
+.navLista a.agora {
+  color: var(--fuschia);
+}
+
 .caLogin {
   display: flex;
   justify-content: space-between;
@@ -96,7 +100,7 @@
 }
 
 .agora {
-  color: var(--fuschia);
+  color: var(--jewel);
 }
 
 .banner {
@@ -186,26 +190,19 @@
 
 .content2 {
   min-height: 100vh;
-  background: var(--void);
+  background-image: url('assets/img/2.png');
   background-size: cover;
-  
 }
 
 .content2 .imgBox {
-  
-  
   display: flex;
   justify-content: space-between;
   background-color: var(--jewel);
-  
 }
 
 .content2 .imgBox img {
   height: 350px;
-  
-  
 }
-
 
 .escrito1 {
   display: flex;
@@ -221,7 +218,6 @@
 .escrito1 .title span {
   color: var(--fuschia);
 }
-
 
 .hog img {
   height: 300px;
@@ -240,7 +236,8 @@
 
 .content3 {
   min-height: 100vh;
-  background-color: var(--void);
+  background-image: url('assets/img/2.png');
+  background-size: cover;
   display: flex;
 }
 
@@ -266,52 +263,70 @@
   border-radius: 5px;
 }
 
-
-
-
 .swiper {
-    width: 100%;
-    height: 30rem;
-    margin-top: 70px;
+  width: 100%;
+  height: 30rem;
+  margin-top: 70px;
+}
 
-  }
+.swiper-slide {
+  font-size: 18px;
+  color: #fff;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 40px 60px;
+}
 
-  .swiper-slide {
-    font-size: 18px;
-    color: #fff;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    padding: 40px 60px;
-  }
-
-  .parallax-bg {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 130%;
-    height: 100%;
-    -webkit-background-size: cover;
-    background-size: cover;
-    background-position: center;
+.parallax-bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 130%;
+  height: 100%;
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-position: center;
   filter: brightness(40%);
+}
+
+.swiper-slide .title {
+  font-size: 41px;
+  font-weight: 300;
+}
+
+.swiper-slide .subtitle {
+  font-size: 21px;
+}
+
+.swiper-slide .text {
+  font-size: 14px;
+  max-width: 400px;
+  line-height: 1.3;
+}
+.content4 {
+  min-height: 70vh;
+
+  background-size: cover;
+  background-image: url(assets/img/2.png);
+
+}
 
 
-  }
 
-  .swiper-slide .title {
-    font-size: 41px;
-    font-weight: 300;
-  }
+.content4 {
+  display: flex;
+  justify-content: space-around;
 
-  .swiper-slide .subtitle {
-    font-size: 21px;
-  }
+}
 
-  .swiper-slide .text {
-    font-size: 14px;
-    max-width: 400px;
-    line-height: 1.3;
-  }
+.content4 .container .imgBox2 .livros {
+  display:flex;
+  justify-content: space-between;
+}
+.content4 .container .imgBox2 .escrito2  {
+  margin-right: 100px;
+}
+
 
 #header.scroll {
   background-color: var(--void2);
@@ -322,7 +337,7 @@
   height: 5rem;
   background-color: var(--void2);
   color: white;
-
+  border-top: 1px solid yellow;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -17,7 +17,6 @@
 /* width */
 ::-webkit-scrollbar {
   width: 12px;
-  
 }
 
 /* Handle */
@@ -33,9 +32,9 @@
 
 /* VARIAVEIS CORES */
 :root {
-  --void: #392116;
-  --void2: #2e3cd9;
-  --fuschia: #fa991b;
+  --void: #0d0625;
+  --void2: #1f0f53;
+  --fuschia: #f5c322;
   --jewel: #531dd9;
   --stark: #e9e2e2;
 }
@@ -79,9 +78,14 @@
   width: 200px;
   list-style-type: none;
 }
+
 .navLista a {
   text-decoration: none;
   color: var(--stark);
+}
+
+.navLista a.agora {
+  color: var(--fuschia);
 }
 
 .caLogin {
@@ -90,12 +94,8 @@
   width: 100px;
 }
 
-.agora {
-  color: var(--fuschia);
-}
-
 .banner {
-  background-image: url('assets/img/Mitologia-Grega-131-Estalagem-Nerd-CAPA.jpg');
+  background-image: url('assets/img/1.png');
   background-size: cover;
   min-height: 100vh;
   display: flex;
@@ -108,6 +108,7 @@
   top: 150px;
   left: 210px;
 }
+
 .mouseScroll img {
   height: 35px;
   animation: float 6s ease-in-out infinite;
@@ -120,6 +121,10 @@
   width: 450px;
   color: var(--stark);
   text-shadow: 1px 1.5px black;
+}
+
+.text1 .text1-1 {
+  height: 45%;
 }
 
 .text1 h1 {
@@ -146,15 +151,18 @@
   0% {
     width: 0;
   }
+
   99.9% {
     border-right: 0.15em solid var(--fuschia);
   }
+
   100% {
     border: none;
   }
 }
 
 @keyframes float {
+
   0%,
   100% {
     transform: translatey(0);
@@ -180,9 +188,10 @@
 /* CONTEUDO 2 */
 
 .content2 {
-  min-height: 100vh;
-  background: var(--void);
+  min-height: 70vh;
+  display: flex;
   background-size: cover;
+  background-image: url('assets/img/2.png');
 }
 
 .content2 .imgBox {
@@ -208,38 +217,46 @@
   width: 350px;
   font-size: 36px;
 }
+
 .escrito1 .title span {
   color: var(--fuschia);
 }
 
 .imgBox2 {
-  margin-top: 100px;
+
   display: flex;
   justify-content: space-between;
 }
+
 .hog img {
+  margin-top: 70px;
   height: 300px;
   border-radius: 5px;
 }
 
 .escrito2 p {
+  margin-top: 70px;
   width: 300px;
   color: var(--stark);
   font-size: 26px;
 }
+
 .escrito2 p span {
   color: var(--fuschia);
   font-weight: 600;
 }
 
 .content3 {
-  min-height: 100vh;
+  min-height: 50vh;
   background-color: var(--void);
   display: flex;
+  background-image: url('assets/img/2.png');
+  background-size: cover;
 }
 
 .imgBox3 {
-  margin-top: 200px;
+  margin-top: 100px;
+  margin-bottom: 100px;
   display: flex;
   justify-content: space-between;
 }
@@ -249,6 +266,7 @@
   color: var(--stark);
   font-size: 26px;
 }
+
 .escrito3 p span {
   color: var(--fuschia);
   font-weight: 600;
@@ -257,6 +275,32 @@
 .leitura img {
   height: 350px;
   border-radius: 5px;
+}
+
+
+.content4 {
+  min-height: 70vh;
+
+  background-size: cover;
+  background-image: url(assets/img/2.png);
+
+}
+
+
+
+.content4.book {
+  display: flex;
+  justify-content: space-around;
+
+}
+
+.content4.book .container .imgBox2 .livros {
+  display:flex;
+  justify-content: space-between;
+}
+
+.content4.book .container .imgBox2 p {
+  margin-right: 100px;
 }
 
 /* SWIPER1*/
@@ -275,17 +319,25 @@
   height: 300px;
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .swiper-slide img {
   border-radius: 5px;
+  
+}
+
+.swiper-slide span.title {
+  font-weight: 600;
+  color:var(--fuschia);
+  margin-top: 10px;
 }
 
 
 
+
 /* SWIPER2*/
-
-
 
 /* .swiper2 {
   width: 240px;
@@ -316,4 +368,5 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  border-top: 1px solid var(--fuschia);
 }

@@ -17,7 +17,6 @@
 /* width */
 ::-webkit-scrollbar {
   width: 12px;
-  
 }
 
 /* Handle */
@@ -45,9 +44,7 @@
   min-height: 100vh;
   background-color: var(--void);
   margin-top: 0px;
-  display: flex;
-  justify-content: space-between;
-  
+ d
 }
 
 .container {
@@ -57,7 +54,7 @@
 
 #header {
   width: 100%;
-  
+
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -66,7 +63,6 @@
   z-index: 100;
   color: var(--stark);
   margin-bottom: 0px;
-  
 }
 
 #header .title {
@@ -101,30 +97,26 @@
   color: var(--fuschia);
 }
 
-
-
 .banner {
-    background-image: url('assets/img/proclamado.jpg');
-    background-size: cover;
-    min-height: 100vh;
-    
-    /* filter: brightness(50%); */
-  }
-  .boxLogin
-  {
-      min-height: 100vh;
-      width: 150px;
-      background-color: var(--stark);
-  }
+  background-image: url('assets/img/proclamado.jpg');
+  background-size: cover;
+  min-height: 100vh;
+
+  /* filter: brightness(50%); */
+}
+.boxLogin {
+  height: 100%;
+  width: 150px;
+  background-color: var(--stark);
+}
 
 .footer {
-    width: 100%;
-    height: 5rem;
-    background-color: var(--void2);
-    color: white;
-  
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
+  width: 100%;
+  height: 5rem;
+  background-color: var(--void2);
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
