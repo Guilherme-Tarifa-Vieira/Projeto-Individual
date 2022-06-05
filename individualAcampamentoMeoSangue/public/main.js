@@ -1,12 +1,20 @@
 const header = document.querySelector('#header')
+const mouse = document.querySelector('#mouse')
 const navHeight = header.offsetHeight
 window.addEventListener('scroll', function () {
   if (window.scrollY >= navHeight) {
     // scroll é maior que o header//
     header.classList.add('scroll')
+
+    setTimeout(() => {
+      mouse.classList.add('scroll')
+    }, '900')
   } else {
     //menor q altura do header//
     header.classList.remove('scroll')
+    setTimeout(() => {
+      mouse.classList.remove('scroll')
+    }, '900')
   }
 })
 
@@ -25,7 +33,10 @@ var swiper = new Swiper('.mySwiper', {
     slideShadows: false
   },
   loop: true,
-  Infinity: true
+  autoplay: {
+    delay: 3000,
+    disableOnInteraction: false
+  }
 })
 
 // var swiper1 = new Swiper1('.mySwiper', {

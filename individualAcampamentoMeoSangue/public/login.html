@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Acampamento meio-sangue</title>
+    <link rel="stylesheet" href="login.css" />
+    <link rel="icon" href="assets/img/trident-emblem-svgrepo-com.svg" type="image" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+
+</head>
+
+<body>
+    <div id="header">
+        <img style="height: 50px;"src="assets/img/logoHalf-removebg-preview.png">
+        <ul class="navLista">
+            <li><a href="index.html">Início</a></li>
+            <li><a href="descobrir.html">Descobrir</a></li>
+            
+        </ul>
+        <div class="caLogin">
+            <a class="btn-grad" href="index.html"><p>Login</p></a>
+            <a href="cadastro.html"><p>Cadastro</p></a>
+        </div>
+    </div>
+    <div class="content">
+        <div class="banner"><div class="boxLogin">
+            
+                  
+                  <div class="card login">
+                    <div class="h2">
+                      <h2>Login</h2>
+                    </div>
+                    <form>
+                      <label for="inputEmail"></label>
+                      <input placeholder="E-mail" type="text" id="email_input" />
+                      <label for="inputSenha"></label>
+                      <input placeholder="Senha" type="password" id="senha_input" />
+                      <button onclick="entrar()" type="button">Entrar</button>
+                      <p>Não é membro? <a href="cadastro.html">Cadastre-se agora!</a></p>
+                    </form>
+                    <div id="div_aguardar" class="loading-div">
+                      <img src="assets/img/circle-loading.gif" id="loading-gif" />
+                    </div>
+            
+                    <div id="div_erros_login"></div>
+                    <div class="alerta_erro">
+                      <div class="card_erro" id="cardErro">
+                        <span id="mensagem_erro"></span>
+                      </div>
+                    </div>
+                  </div>
+               
+            
+            
+        </div></div>
+        
+    </div>
+    <div class="footer">
+        <p>Desenvolvimento para web &hearts; </p>
+    </div>
+
+</body>
+
+</html>
+
+<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+<script src="main.js"></script>
+</body>
+
+</html>
+
+<script>
+  function entrar() {
+    aguardar()
+
+    var emailVar = email_input.value
+    var senhaVar = senha_input.value
+
+    // TODO: VERIFICAR AS VALIDAÇÕES QUE ELES ESTÃO APRENDENDO EM ALGORITMOS
+    if (emailVar == '' || senhaVar == '') {
+      cardErro.style.display = 'block'
+      mensagem_erro.innerHTML = 'Preencha todos os campos para prosseguir!'
+      finalizarAguardar()
+      return false
+    } else {
+      setInterval(sumirMensagem, 5000)
+    }
+
+    if (emailVar.indexOf('@') == -1 || emailVar.indexOf('.com') == -1) {
+      cardErro.style.display = 'block'
+      mensagem_erro.innerHTML =
+        'Ops, e-mail inválido! Verifique e tente novamente.'
+      finalizarAguardar()
+      return false
+    } else {
+      setInterval(sumirMensagem, 5000)
+    }
+
+    console.log('FORM LOGIN: ', emailVar)
+    console.log('FORM SENHA: ', senhaVar)
+
+    fetch('/usuarios/autenticar', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        emailServer: emailVar,
+        senhaServer: senhaVar
+      })
+    })
+      .then(function (resposta) {
+        console.log('ESTOU NO THEN DO entrar()!')
+
+        if (resposta.ok) {
+          console.log(resposta)
+
+          resposta.json().then((json) => {
+            console.log(json)
+            console.log(JSON.stringify(json))
+
+            sessionStorage.EMAIL_USUARIO = json.emailUsuario
+            sessionStorage.NOME_USUARIO = json.nomeUsuario
+            sessionStorage.ID_USUARIO = json.idUsuario
+
+            setTimeout(function () {
+              window.location = './dashboard/dashboard.html'
+            }, 1000) // apenas para exibir o loading
+          })
+        } else {
+          console.log('Houve um erro ao tentar realizar o login!')
+
+          resposta.text().then((texto) => {
+            console.error(texto)
+            finalizarAguardar(texto)
+          })
+        }
+      })
+      .catch(function (erro) {
+        console.log(erro)
+      })
+
+    return false
+  }
+  function aguardar() {
+    var divAguardar = document.getElementById('div_aguardar')
+    divAguardar.style.display = 'flex'
+  }
+
+  function finalizarAguardar(texto) {
+    var divAguardar = document.getElementById('div_aguardar')
+    divAguardar.style.display = 'none'
+
+    var divErrosLogin = document.getElementById('div_erros_login')
+    if (texto) {
+      divErrosLogin.innerHTML = texto
+    }
+  }
+  function sumirMensagem() {
+    cardErro.style.display = 'none'
+  }
+</script>
