@@ -6,6 +6,25 @@ function testar(req, res) {
   console.log('ENTRAMOS NA usuarioController')
   res.json('ESTAMOS FUNCIONANDO!')
 }
+function count(req, res) {
+  usuarioModel
+    .count()
+    .then(function (resultado) {
+      if (resultado.length > 0) {
+        res.status(200).json(resultado)
+      } else {
+        res.status(204).send('Nenhum resultado encontrado!')
+      }
+    })
+    .catch(function (erro) {
+      console.log(erro)
+      console.log(
+        'Houve um erro ao realizar a consulta! Erro: ',
+        erro.sqlMessage
+      )
+      res.status(500).json(erro.sqlMessage)
+    })
+}
 
 function listar(req, res) {
   usuarioModel
@@ -67,6 +86,7 @@ function cadastrar(req, res) {
   var nome = req.body.nomeServer
   var email = req.body.emailServer
   var senha = req.body.senhaServer
+  var personagem = req.body.personagemServer
 
   // Faça as validações dos valores
   if (nome == undefined) {
@@ -75,10 +95,12 @@ function cadastrar(req, res) {
     res.status(400).send('Seu email está undefined!')
   } else if (senha == undefined) {
     res.status(400).send('Sua senha está undefined!')
+  } else if (personagem == undefined) {
+    res.status(400).send('Seu personagem está undefined!')
   } else {
     // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
     usuarioModel
-      .cadastrar(nome, email, senha)
+      .cadastrar(nome, email, senha, personagem)
       .then(function (resultado) {
         res.json(resultado)
       })
@@ -97,5 +119,6 @@ module.exports = {
   entrar,
   cadastrar,
   listar,
-  testar
+  testar,
+  count
 }

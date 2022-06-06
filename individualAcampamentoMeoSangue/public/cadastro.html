@@ -47,6 +47,8 @@
             <input placeholder="Nome" type="text" id="inputNome" />
 
             <select class="selectPersonagens" id="personagens">
+              <option value="">Selecione seu personagem</option>
+
               <option value="1">Percy Jackson</option>
               <option value="2">Annabeth Chase</option>
               <option value="3">Jason Grace</option>
@@ -98,6 +100,9 @@
 </html>
 
 <script>
+  
+  var usuarios = []
+
   function cadastrar() {
     aguardar()
     //Recupere o valor da nova input pelo nome do id
@@ -106,9 +111,22 @@
     var emailVar = inputEmail.value
     var senhaVar = inputSenha.value
     var confirmacaoSenhaVar = inputConfirmarSenha.value
+    var personagemVar = Number(personagens.value)
 
+
+
+    // PERSONAGENS
+
+    // if (personagemVar == 1) {
+    //   for (var c = 0; c < usuarios.length; c++) {
+    //     usuarios.push(personagemVar)
+    //     percy++
+
+    //   }
+    // }
     if (
       nomeVar == '' ||
+      personagemVar == '' ||
       emailVar == '' ||
       senhaVar == '' ||
       confirmacaoSenhaVar == ''
@@ -130,7 +148,7 @@
       finalizarAguardar()
       return false
     } else {
-      //setInterval(sumirMensagem, 5000)
+      // setInterval(sumirMensagem, 5000)
     }
 
     if (senhaVar != confirmacaoSenhaVar) {
@@ -140,23 +158,24 @@
       finalizarAguardar()
       return false
     } else {
-      //setInterval(sumirMensagem, 5000)
+      // setInterval(sumirMensagem, 5000)
     }
 
     // Enviando o valor da nova input
     fetch('/usuarios/cadastrar', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        // crie um atributo que recebe o valor recuperado aqui
-        // Agora vá para o arquivo routes/usuario.js
-        nomeServer: nomeVar,
-        emailServer: emailVar,
-        senhaServer: senhaVar
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          // crie um atributo que recebe o valor recuperado aqui
+          // Agora vá para o arquivo routes/usuario.js
+          nomeServer: nomeVar,
+          emailServer: emailVar,
+          senhaServer: senhaVar,
+          personagemServer: personagemVar
+        })
       })
-    })
       .then(function (resposta) {
         console.log('resposta: ', resposta)
 
@@ -177,6 +196,7 @@
 
     return false
   }
+
   function aguardar() {
     var divAguardar = document.getElementById('div_aguardar')
     divAguardar.style.display = 'flex'

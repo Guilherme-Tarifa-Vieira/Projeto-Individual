@@ -1,151 +1,152 @@
-CREATE DATABASE Allincare;
-USE Allincare;
 
-CREATE TABLE Transportadora(
-	idTransportadora INT PRIMARY KEY AUTO_INCREMENT,
-	nomeFantasia VARCHAR(45),
-    razaoSocial VARCHAR(45),
-    nomeRepresentante VARCHAR(45)
+create database meioSangue;
+use meioSangue;
+
+
+-- -----------------------------------------------------
+-- Tabela Deuses
+-- -----------------------------------------------------
+create table tbDeus (
+  idDeus int auto_increment not null primary key,
+  nomeDeus varchar (45),
+ elementoDeus varchar(45), check (elementoDeus = 'Fogo' 
+ or elementoDeus = 'Ar' 
+ or elementoDeus = 'Água'
+ or elementoDeus = 'Amor'
+ or elementoDeus = 'Sombra'
+ or elementoDeus = 'Estratégia')
+ );
+
+
+-- -----------------------------------------------------
+-- Tabela Personagens
+-- -----------------------------------------------------
+create table tbPersonagem (
+  idPersonagem int auto_increment not null primary key,
+  nomePersonagem varchar(45),
+  fkDeus int not null, foreign key (fkDeus) references tbDeus(idDeus)
+  );
+
+-- -----------------------------------------------------
+-- Tabela Usuarios
+-- -----------------------------------------------------
+create table tbUsuario(
+idUsuario int primary key auto_increment not null,
+nomeUsuario varchar(45) not null,
+emailUsuario varchar(55) not null,
+senhaUsuario varchar(60) not null,
+fkPersonagem int, foreign key (fkPersonagem) references tbPersonagem(idPersonagem)
 );
 
-CREATE TABLE UsuarioTransp(
-	idUsuario INT PRIMARY KEY AUTO_INCREMENT,
-    nomeUsuario VARCHAR(45),
-    cpfUsuario VARCHAR(14) UNIQUE,
-    numCelular VARCHAR(14) UNIQUE,
-    emailUsuario VARCHAR(45) UNIQUE,
-    senhaUsuario VARCHAR(45)
-);
 
-CREATE TABLE CargoUsuario(
-	fkUsuario INT,
-    FOREIGN KEY (fkUsuario) REFERENCES UsuarioTransp(idUsuario),
-    fkTransportadora INT,
-    FOREIGN KEY (fkTransportadora) REFERENCES Transportadora(idTransportadora),
-    nomeCargo VARCHAR(11),
-    CHECK (nomeCargo = 'Coordenador' OR nomeCargo = 'Supervisor' OR nomeCargo = 'Estagiário'),
-    cargaHoraria TIME
-);
+-- -----------------------------------------------------
+-- Tabela atributos
+-- -----------------------------------------------------
+create table tbAtributo(
+  idAtributo int primary key auto_increment not null,
+  nomeAtributo varchar(45),
+  pontoAtributo int,
+  fkPersonagemAtributo int, 
+  foreign key (fkPersonagemAtributo) 
+  references tbPersonagem(idPersonagem)
+  );
 
-CREATE TABLE EnderecoTransp(
-	idEnd INT PRIMARY KEY AUTO_INCREMENT,
-    fkTransportadora INT,
-    FOREIGN KEY (fkTransportadora) REFERENCES Transportadora(idTransportadora),
-    cepEnd VARCHAR(9),
-    numEnd INT,
-    complementoEnd VARCHAR(45),
-    cnpjTransportadora VARCHAR(18) UNIQUE
-);
 
-CREATE TABLE ContatoTransp(
-	idContato INT PRIMARY KEY AUTO_INCREMENT,
-    fkTransportadora INT,
-    FOREIGN KEY (fkTransportadora) REFERENCES Transportadora(idTransportadora),
-    numeroContato VARCHAR(14) UNIQUE,
-    tipoNum VARCHAR(9),
-    CHECK (tipoNum = 'Fixo' OR tipoNum = 'Celular' OR tipoNum = 'Whatsapp' OR tipoNum = 'Comercial')
-); 
+select * from tbDeus;
+select * from tbPersonagem;
+select * from tbUsuario;
+select * from tbAtributo;
 
-CREATE TABLE Veiculo(
-	idVeiculo INT PRIMARY KEY AUTO_INCREMENT,
-    fkTransportadora INT,
-    FOREIGN KEY (fkTransportadora) REFERENCES Transportadora(idTransportadora),
-	gps VARCHAR(3),
-    CHECK (gps = 'ON' OR gps = 'OFF'),
-	placa VARCHAR(6) UNIQUE,
-	qtdLotesVacina INT,
-	modelo VARCHAR(45)
-);
 
-CREATE TABLE HistMedida(
-	idHistMedida INT PRIMARY KEY AUTO_INCREMENT,
-	fkVeiculo INT,
-    FOREIGN KEY (fkVeiculo) REFERENCES Veiculo(idVeiculo),
-    valorTemperatura INT,
-	dataHora DATETIME DEFAULT CURRENT_TIMESTAMP
-);
+-- inserções
+insert into tbDeus(nomeDeus, elementoDeus) 
+values ('Poseidon','Água'),
+       ('Atena','Estratégia'),
+       ('Zeus','Ar'),
+       ('Afrodite','Amor'),
+       ('Hades','Sombra'),
+       ('Hefestos','Fogo'),
+       ('Ares','Fogo');
+       
+--
+--
+insert into tbPersonagem(nomePersonagem,fkDeus)
+values ('Percy Jackson','1'),
+       ('Annabeth Chase','2'),
+       ('Jason Grace','3'),
+       ('Piper Mclean','4'),
+       ('Hazel Levesque','5'),
+       ('Leo Valdez','6'),
+       ('Frank Zhang','7');
+--
+--
+insert into tbUsuario(nomeUsuario, emailUsuario, senhaUsuario, fkPersonagem) 
+values ('Jorge Amado','jorge@gmail.com','1234','1'),
+('Joao Amado','joao@gmail.com','1234','1'),
+	   ('Ana Rosa','ana@gmail.com','1234','2'),
+       ('Pericles F.','Pericles@gmail.com','1234','3'),
+       ('João Matos','joao@gmail.com','1234','4'),
+       ('Clayton Afonso','clayton@gmail.com','1234','5'),
+       ('Igor Fonseca','igor@gmail.com','1234','6'),
+       ('caroline Fonseca','carol@gmail.com','1234','2'),
+       ('Rogerio Silva','rogerio@gmail.com','1234','1'),
+       ('Ferdinando Rocha','fernando@gmail.com','1234','1'),
+       ('Patricia querizo','patricia@gmail.com','1234','2'),
+       ('Diego Andrade','Diego@gmail.com','1234','7'),
+       ('Andreas Rochedo','Andreas@gmail.com','1234','7'),
+       ('Jacque Roseline','jacque@gmail.com','1234','7');
 
-ALTER TABLE HistMedida MODIFY COLUMN valorTemperatura DECIMAL(3,1);
+--
+--
 
-DESC HistMedida;
+insert into tbAtributo(nomeAtributo, pontoAtributo, fkPersonagemAtributo)
+values ('Força','1','1'),
+       ('Agilidade','1','1'),
+       ('Destreza','1','1'),
+       ('Sorte','1','1'),
+       
+       ('Força','1','2'),
+       ('Agilidade','1','2'),
+       ('Destreza','1','2'),
+       ('Sorte','1','2'),
+       
+       ('Força','1','3'),
+       ('Agilidade','1','3'),
+       ('Destreza','1','3'),
+       ('Sorte','1','3'),
+       
+       ('Força','1','4'),
+       ('Agilidade','1','4'),
+       ('Destreza','1','4'),
+       ('Sorte','1','4'),
+       
+       ('Força','1','5'),
+       ('Agilidade','1','5'),
+       ('Destreza','1','5'),
+       ('Sorte','1','5'),
+       
+       ('Força','1','6'),
+       ('Agilidade','1','6'),
+       ('Destreza','1','6'),
+       ('Sorte','1','6'),
+       
+       ('Força','1','7'),
+       ('Agilidade','1','7'),
+       ('Destreza','1','7'),
+       ('Sorte','1','7');
 
-SELECT * FROM Transportadora;
-SELECT * FROM UsuarioTransp;
-SELECT * FROM CargoUsuario;
-SELECT * FROM EnderecoTransp;
-SELECT * FROM ContatoTransp;
-SELECT * FROM Veiculo;
-SELECT * FROM HistMedida;
 
-INSERT INTO Transportadora
-VALUES (NULL,'FreteBras','FreteBras Internet e Serviços LTDA','Larissa Freitas'),
-		(NULL,'Loggi','Loggi Tecnologia LTDA','Fabiano Rodrigues'),
-        (NULL,'Lalamove','LALAMOVE TECNOLOGIA (BRASIL) LTDA','Cecília Almeida');
 
-INSERT INTO UsuarioTransp
-VALUES (NULL,'Edson Feitoza','111.111.111-11','11982993672','edson.f@gmail.com','123edson'),
-		(NULL,'Guilherme Tarifa','111.111.111-00','11982133672','guilherme.t@gmail.com','123guilherme'),
-		(NULL,'Paula Cristina','222.222.222-22','11953660154','paula.c@gmail.com','123paula'),
-        (NULL,'Kauan Mendes','222.222.222-00','11953987154','kauan.m@gmail.com','123kauan'),
-        (NULL,'Alice Santos','333.333.333-33','11980213320','alice.s@gmail.com','123alice'),
-        (NULL,'Emilly Dantas','333.333.333-00','11980998320','emilly.d@gmail.com','123emilly');
-        
-INSERT INTO CargoUsuario
-VALUES ('1','2','Coordenador','08:00:00'),
-		('2','3','Supervisor','10:00:00'),
-        ('3','1','Estagiário','06:00:00'),
-        ('4','2','Coordenador','08:00:00'),
-        ('5','3','Supervisor','10:00:00'),
-        ('6','1','Estagiário','06:00:00');
-        
-INSERT INTO EnderecoTransp
-VALUES (NULL,'1','89872-000','123','12º Andar','00000000000'),
-		(NULL,'2','89843-000','87','Bloco 5','11111111111'),
-        (NULL,'3','89859-000','3245','3º Andar','22222222222');
-        
-INSERT INTO ContatoTransp
-VALUES (NULL,'1','11954678342','Comercial'),
-		(NULL,'1','11923779342','Whatsapp'),
-        (NULL,'2','1123383427','Fixo'),
-        (NULL,'2','11954627653','Celular'),
-        (NULL,'3','11922278342','Whatsapp');
-        
-INSERT INTO Veiculo
-VALUES (NULL,'1','ON','KRF395','2','Volks'),
-		(NULL,'1','ON','HOA639','2','Volks'),
-		(NULL,'1','ON','PHF245','2','Mercedes'),
-		(NULL,'2','ON','JÇS846','2','Mercedes'),
-		(NULL,'2','ON','IHF465','2','Volks'),
-		(NULL,'2','ON','XCH824','2','Volvo'),
-        (NULL,'3','ON','PHF321','2','Mercedes'),
-		(NULL,'3','ON','JDN846','2','Volvo'),
-		(NULL,'3','ON','LKO465','2','Mercedes'),
-		(NULL,'3','ON','XCB634','2','Volvo');
-        
-INSERT INTO HistMedida
-VALUES (NULL,'1','25.6',CURRENT_TIMESTAMP);
+select nomeUsuario as 'usuario', nomePersonagem as 'personagem', count(fkPersonagem) as 'personagemTotal' from tbUsuario
+join tbPersonagem on fkPersonagem = idPersonagem
+where idPersonagem = 1;
 
-select * from HistMedida;
-
-SELECT fkVeiculo, valorTemperatura,
-CASE
-WHEN valorTemperatura <= '-22.5' THEN 'Crítico Frio'
-WHEN valorTemperatura <= '-21.5' THEN 'Alerta Frio'
-WHEN valorTemperatura >= '-17.5' THEN 'Crítico Quente'
-WHEN valorTemperatura >= '-18.5' THEN 'Alerta Quente'
-ELSE 'Ideal'
-END AS alertas
-FROM HistMedida;
-
-SELECT
-CASE
-WHEN valorTemperatura <= '-22.5' THEN 'Crítico Frio'
-WHEN valorTemperatura <= '-21.5' THEN 'Alerta Frio'
-WHEN valorTemperatura >= '-17.5' THEN 'Crítico Quente'
-WHEN valorTemperatura >= '-18.5' THEN 'Alerta Quente'
-ELSE 'Ideal'
-END AS alertas,
-COUNT(*) AS quantidade
-FROM HistMedida
-GROUP BY alertas
-ORDER BY quantidade DESC;
+ SELECT nomeUsuario as nome, count(fkPersonagem) as voto, nomePersonagem as personagem
+         FROM tbUsuario
+         join tbPersonagem on idPersonagem = fkPersonagem
+         group by tbPersonagem.nomePersonagem;
+         
+         SELECT nomeUsuario as 'nome', count(fkPersonagem) as 'voto', nomePersonagem as 'personagem'
+         FROM tbUsuario
+         join tbPersonagem on fkPersonagem = idPersonagem
+         group by tbPersonagem.nomePersonagem;

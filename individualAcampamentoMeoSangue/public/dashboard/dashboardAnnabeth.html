@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Acampamento meio-sangue</title>
+    <link rel="stylesheet" href="dashboardAnnabeth.css" />
+    <link
+      rel="icon"
+      href="./assets/img/trident-emblem-svgrepo-com.svg"
+      type="image"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper@8/swiper-bundle.min.css"
+    />
+    <script
+      type="text/javascript"
+      src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"
+    ></script>
+  </head>
+
+  <body>
+    <div id="header">
+      <div class="container">
+        <img
+          style="height: 50px"
+          src="../assets/img/logoHalf-removebg-preview.png"
+        />
+
+        <div class="caLogin">
+          <a type="button" onclick="limparSessao()"
+            ><ion-icon name="log-out-outline"></ion-icon
+          ></a>
+        </div>
+      </div>
+    </div>
+    <div id="contentTotal">
+      <div class="content">
+        <div class="banner">
+          <div class="boxLogin">
+            <div class="bannerChale"></div>
+            <div clas="descBemVindo">
+              Olá! Seja Bem-Vindo,
+              <div id="b_usuario">Usuário</div>
+              sua escolha foi
+              <div id="escolha">escolha</div>
+            </div>
+            <div class="descChale">
+              <h2 id="cabana_numero">Chale número 6</h2>
+              <div class="p">
+                Cabana apilhada de livros<br />
+                e armas,camas encostadas <br />
+                nas paredes 'como se dormir<br />
+                não fosse importante'.
+              </div>
+            </div>
+            <div class="descPoseidon">
+              <h2 id="nome_deus">Atena</h2>
+              <div id="desc_deus" class="p">
+                Filho(a) da Deusa da sabedoria e<br />
+                estratégia, orgulhoso e crê que<br />
+                pode consertar tudo<br />
+              </div>
+            </div>
+          </div>
+
+          <div class="imgPerso"></div>
+          <div class="card chart">
+            <div class="desc">Quantidade de Escolhas do personagem</div>
+            <div class="chartJS">
+              <canvas id="myChart" widht="200px" height="200px"></canvas>
+            </div>
+          </div>
+
+          <div class="card chart1">
+            <div class="desc">porcentagem da escolha(personagem)</div>
+            <div class="chartJS">
+              <canvas id="myChart1" widht="200px" height="200px"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    <script src="../main.js"></script>
+    <script src="../js/funcoes.js"></script>
+
+    <!-- FUNÇÃO FRONT-BECK -->
+
+    <script>
+      var respostaAlerta
+      let proximaAtualizacao
+
+      // window.onload = count()
+
+      // window.onload = obterDadosGrafico()
+      window.onload = count()
+      // window.onload = plotarGrafico()
+
+      b_usuario.innerHTML = sessionStorage.NOME_USUARIO
+      escolha.innerHTML = sessionStorage.NOME_PERSONAGEM
+
+      function alterarTitulo(idUsuario) {
+        var tituloVeiculo = document.getElementById('tituloVeiculo')
+        mensagem_usuario.innerHTML =
+          "Últimas medidas de Temperatura do <span style='color: #e6005a'>Veículo " +
+          idUsuario +
+          '</span>'
+      }
+
+      // O gráfico é construído com três funções:
+      // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
+      // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
+      // 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
+
+      // Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
+      // para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
+      // A função *obterDadosGrafico* também invoca a função *plotarGrafico*
+
+      //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
+      //     Para ajustar o "select", ajuste o comando sql em src/models
+
+      // function obterDadosGrafico(idUsuario) {
+      //   // alterarTitulo(idVeiculo)
+
+      //   if (proximaAtualizacao != undefined) {
+      //     clearTimeout(proximaAtualizacao)
+      //   }
+
+      //   fetch(`/medidas/ultimas/${idUsuario}`, { cache: 'no-store' })
+      //     .then(function (response) {
+      //       if (response.ok) {
+      //         response.json().then(function (resposta) {
+      //           console.log(`Dados recebidos: ${JSON.stringify(resposta)}`)
+      //           resposta.reverse()
+
+      //           plotarGrafico(resposta, idUsuario)
+      //         })
+      //       } else {
+      //         console.error('Nenhum dado encontrado ou erro na API')
+      //       }
+      //     })
+      //     .catch(function (error) {
+      //       console.error(
+      //         `Erro na obtenção dos dados p/ gráfico: ${error.message}`
+      //       )
+      //     })
+      // }
+
+      // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
+      // Configura o gráfico (cores, tipo, etc), materializa-o na página e,
+      // A função *plotarGrafico* também invoca a função *atualizarGrafico*
+
+      // function plotarGrafico(resposta, idUsuario) {
+      //   console.log('Iniciando plotagem do gráfico...')
+
+      //   var dados = {
+      //     labels: ['Percy', 'Annabeth', 'Jason', ''],
+      //     datasets: [
+      //       {
+      //         yAxisID: 'y-Eixo',
+      //         label: 'votos',
+      //         borderColor: 'blue',
+      //         backgroundColor: '#32b9cd8f',
+      //         fill: true,
+      //         data: []
+      //       }
+      //     ]
+      //   }
+
+      //   for (i = 0; i < resposta.length; i++) {
+      //     var registro = resposta[i]
+      //     dados.labels.push(registro.personagem)
+      //     dados.datasets[0].data.push(registro.voto)
+      //   }
+
+      //   console.log(JSON.stringify(dados))
+
+      //   const ctx = document.getElementById('myChart1').getContext('2d')
+      //   window.myChart1 = Chart.bar(ctx, {
+      //     type: 'bar',
+      //     data: dados,
+      //     options: {
+      //       responsive: true,
+      //       animation: { duration: 500 },
+      //       hoverMode: 'index',
+      //       stacked: false,
+      //       title: {
+      //         display: false,
+      //         text: 'Dados capturados'
+      //       },
+      //       scales: {
+      //         yAxes: [
+      //           {
+      //             type: 'bar',
+      //             display: true,
+      //             position: 'left',
+      //             id: 'y-temperatura',
+      //             ticks: {
+      //               beginAtZero: true,
+      //               max: 0,
+      //               min: -30
+      //             }
+      //           }
+      //         ]
+      //       }
+      //     }
+      //   })
+
+      //   setTimeout(() => atualizarGrafico(idUsuario, dados), 1000)
+      // }
+
+      // var qtdVotos = {
+      //   labels: [],
+      //   datasets: [
+      //     {
+      //       yAxisID: 'y-alertas',
+      //       label: 'Quantidade de votos',
+      //       borderColor: '#000',
+      //       backgroundColor: '#32b',
+      //       fill: true,
+      //       data: []
+      //     }
+      //   ]
+      // }
+
+      // for (i = 0; i < respostaAlerta.length; i++) {
+      //   var registroAlertas = respostaAlerta[i]
+      //   qtdVotos.labels.push(registroPersonagem.personagem)
+      //   qtdVotos.datasets[0].data.push(registroVoto.voto)
+      // }
+
+      // console.log(JSON.stringify(qtdVotos))
+
+      // const ctx2 = document.getElementById('myChart').getContext('2d')
+      // window.myChart = Chart.Line(ctx2, {
+      //   type: 'bar',
+      //   data: qtdVotos,
+      //   options: {
+      //     responsive: true,
+      //     animation: { duration: 500 },
+      //     hoverMode: 'index',
+      //     stacked: false,
+      //     title: {
+      //       display: false,
+      //       text: 'Dados capturados'
+      //     },
+      //     scales: {
+      //       yAxes: [
+      //         {
+      //           type: 'bar',
+      //           display: true,
+      //           position: 'left',
+      //           id: 'y-alertas',
+      //           ticks: {
+      //             beginAtZero: true,
+      //             max: 5,
+      //             min: 0
+      //           }
+      //         }
+      //       ]
+      //     }
+      //   }
+      // })
+
+      // setTimeout(() => atualizarGrafico(idUsuario, qtdVotoss), 1000)
+
+      // Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
+      // buscando a última medida inserida em tabela contendo as capturas,
+
+      //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
+      //     Para ajustar o "select", ajuste o comando sql em src/models
+      // function atualizarGrafico(idUsuario, dados) {
+      //   fetch(`/medidas/tempo-real/${idUsuario}`, { cache: 'no-store' })
+      //     .then(function (response) {
+      //       if (response.ok) {
+      //         response.json().then(function (novoRegistro) {
+      //           console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`)
+      //           console.log(`Dados atuais do gráfico: ${dados}`)
+
+      //           // tirando e colocando valores no gráfico
+      //           dados.labels.shift() // apagar o primeiro
+      //           dados.labels.push(novoRegistro[0].personagem) // incluir um novo momento
+
+      //           dados.datasets[0].data.shift() // apagar o primeiro de temperatura
+      //           dados.datasets[0].data.push(novoRegistro[0].personagemTotal) // incluir uma nova medida de temperatura
+
+      //           window.myChart2.update()
+
+      //           // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+      //           proximaAtualizacao = setTimeout(
+      //             () => atualizarGrafico(idUsuario, dados),
+      //             1000
+      //           )
+
+      //           var nomeAlerta = document.getElementById('teste')
+      //           var caminhao1 = novoRegistro[0].temperatura
+
+      //           temp1.innerHTML = `${caminhao1}`
+
+      //           if (caminhao1 <= -22.5) {
+      //             alerta.style.backgroundColor = '#6600ff'
+      //             alerta.innerHTML = 'Crítico Frio'
+      //           }
+      //         })
+      //       } else {
+      //         console.error('Nenhum dado encontrado ou erro na API')
+      //         // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+      //         proximaAtualizacao = setTimeout(
+      //           () => atualizarGrafico(idUsuario, dados),
+      //           1000
+      //         )
+      //       }
+      //     })
+      //     .catch(function (error) {
+      //       console.error(
+      //         `Erro na obtenção dos dados p/ gráfico: ${error.message}`
+      //       )
+      //     })
+      // }
+
+      var percy = ''
+      var annabeth = ''
+      var jason = ''
+      var piper = ''
+      var hazel = ''
+      var leo = ''
+      var frank = ''
+
+      var votoPercy = 0
+      var votoAnnabeth = 0
+      var votoJason = 0
+      var votoPiper = 0
+      var votoHazel = 0
+      var votoLeo = 0
+      var votoFrank = 0
+
+      var voto_total = 0
+
+      function count() {
+        fetch(`/usuarios/count`)
+          .then(function (response) {
+            if (response.ok) {
+              response.json().then(function (resposta) {
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`)
+                percy = resposta[0].nome
+                votoPercy = resposta[0].voto
+                voto_total += votoPercy
+                annabeth = resposta[1].nome
+                votoAnnabeth = resposta[1].voto
+                voto_total += votoAnnabeth
+                jason = resposta[2].nome
+                votoJason = resposta[2].voto
+                voto_total += votoJason
+                piper = resposta[3].nome
+                votoPiper = resposta[3].voto
+                voto_total += votoPiper
+                hazel = resposta[4].nome
+                votoHazel = resposta[4].voto
+                voto_total += votoHazel
+                leo = resposta[5].nome
+                votoLeo = resposta[5].voto
+                voto_total += votoLeo
+                frank = resposta[6].nome
+                votoFrank = resposta[6].voto
+                voto_total += votoFrank
+
+                porc_percy = (votoPercy * 100) / voto_total
+                porc_annabeth = (votoAnnabeth * 100) / voto_total
+                porc_jason = (votoJason * 100) / voto_total
+                porc_piper = (votoPiper * 100) / voto_total
+                porc_hazel = (votoHazel * 100) / voto_total
+                porc_leo = (votoLeo * 100) / voto_total
+                porc_frank = (votoFrank * 100) / voto_total
+
+                data.datasets[0].data[0] = votoPercy
+                data.datasets[0].data[1] = votoAnnabeth
+                data.datasets[0].data[2] = votoJason
+                data.datasets[0].data[3] = votoPiper
+                data.datasets[0].data[4] = votoHazel
+                data.datasets[0].data[5] = votoLeo
+                data.datasets[0].data[6] = votoFrank
+
+                data1.datasets[0].data[0] = porc_percy
+                data1.datasets[0].data[1] = porc_annabeth
+                data1.datasets[0].data[2] = porc_jason
+                data1.datasets[0].data[3] = porc_piper
+                data1.datasets[0].data[4] = porc_hazel
+                data1.datasets[0].data[5] = porc_leo
+                data1.datasets[0].data[6] = porc_frank
+              })
+            } else {
+              throw 'Nenhum resultado encontrado!'
+            }
+          })
+          .catch(function (resposta) {
+            console.error(resposta)
+          })
+      }
+
+      const data = {
+        labels: [
+          `Percy`,
+          'Annabeth',
+          'Jason',
+          'Piper',
+          'Hezel',
+          'Leo',
+          'Frank'
+        ],
+        datasets: [
+          {
+            label: 'Points',
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.8)',
+              'rgba(54, 162, 235, 0.8)',
+              'rgba(255, 206, 86, 0.8)',
+              'rgba(75, 192, 192, 0.8)',
+              'rgba(153, 102, 255, 0.8)',
+              'rgba(255, 159, 64, 0.8)',
+              'rgba(200,15,100, 0.8)'
+            ],
+            data: [0, 0, 0, 0, 0, 0, 0]
+          }
+        ]
+      }
+
+      const config = {
+        type: 'pie',
+        data: data,
+        options: {}
+      }
+
+      const myChart = new Chart(document.getElementById('myChart'), config)
+
+      const data1 = {
+        labels: [
+          `Percy`,
+          'Annabeth',
+          'Jason',
+          'Piper',
+          'Hezel',
+          'Leo',
+          'Frank'
+        ],
+        datasets: [
+          {
+            label: 'Points',
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.8)',
+              'rgba(54, 162, 235, 0.8)',
+              'rgba(255, 206, 86, 0.8)',
+              'rgba(75, 192, 192, 0.8)',
+              'rgba(153, 102, 255, 0.8)',
+              'rgba(255, 159, 64, 0.8)',
+              'rgba(200,15,100, 0.8)'
+            ],
+            data1: [0, 0, 0, 0, 0, 0, 0]
+          }
+        ]
+      }
+
+      const config1 = {
+        type: 'doughnut',
+        data: data1,
+        options: {}
+      }
+
+      const myChart1 = new Chart(document.getElementById('myChart1'), config1)
+
+      //       if (sessionStorage.NOME_PERSONAGEM == 'Annabeth Chase') {
+      //         contentTotal.innerHTML = `
+
+      //         <div class="content">
+
+      //         <div class="banner" style=" background-image: url('../assets/img/marDash.jpg');
+      //   background-size: cover;
+      //   min-height: 100vh;
+      //   min-width: 100vw;
+      //   position: relative;">
+      //         <div class="boxLogin" style="display: flex;
+      //   flex-direction: column;
+      //   padding-left: 5px;
+      //   padding-right: 5px;
+      //   justify-content: space-around;
+
+      //   height: 100%;
+      //   width: 250px;
+      //   background-color: var(--void2);
+      //   margin-left: 150px;
+      //   position: absolute;
+      //   transition: 1s;
+      //   color: var(--stark);">
+      //           <div class="bannerChale" style=" background-image: url('../assets/img/chalePoseidon.jpg');
+      //   background-size: cover;
+      //   height: 150px;
+      //   border-radius: 7px;
+      //   margin-top: 25px;"></div>
+      //           <div clas="descBemVindo" style="margin-top: 15px;">
+      //             Olá! Seja Bem-Vindo,
+      //             <div id="b_usuario" style="color: var(--fuschia);
+      //   text-transform: uppercase;">${nome}</div>
+      //           </div>
+      //           <div class="descChale" >
+      //             <h2 id="cabana_numero" style=" margin-top: 15px ;
+      //   color: var(--fuschia);
+      // ">Chale número 3</h2>
+      //             <div class="p">
+      //               Cabana arejada, de frente<br />ao mar de Long Island.
+      //             </div>
+      //           </div>
+      //           <div class="descPoseidon">
+      //             <h2 id="nome_deus" style=" margin-top: 15px;
+      //   color: var(--fuschia);
+      // }">Poseidon</h2>
+      //             <div id="desc_deus" class="p">
+      //               Filho do deus do mar,<br />
+      //               comprometido e incapaz<br />
+      //               de trair um companheiro.
+      //             </div>
+      //           </div>
+      //         </div>
+
+      //         <div class="imgPerso" style="background-image: url('../assets/img/Percy_Jackson1-removebg-preview.png');
+      //   background-size: cover;
+      //   height: 550px;
+      //   width: 350px;
+      //   position: relative;
+      // bottom: -70px;
+      //   margin-left: 290px;"></div>
+      //         <div class="card chart"
+      //         style=" padding: 5px 5px 5px 5px;
+      //   display: flex;
+      //   border-radius: 10px 10px 0 0;
+      //   align-items: center;
+      //   justify-content: center;
+      //   flex-direction: column;
+      //   height: 50%;
+      //   width: 350px;
+      //   background-color: var(--void2);
+      //   margin-left: 600px;
+      //   position: absolute;
+      //   transition: 1s;
+      //   bottom: 0;">
+      //           <div class="desc" style="color: var(--fuschia);
+      //   font-weight: bold;
+      //   font-size: medium;">Quantos por cem, foi sua escolha</div>
+      //           <div class="chartJS" style="border-radius: 10px;
+      //   display: flex;
+      //   justify-content: center;
+      //   align-items: center;
+      //   background-color: var(--stark);
+      //   height: 250px;
+      //   width: 100%;">
+      //             <canvas id="myChart"></canvas>
+      //           </div>
+      //         </div>
+
+      //         <div class="card chart1" style="padding: 5px 5px 5px 5px;
+      //   display: flex;
+      //   border-radius: 10px 10px 0 0;
+      //   align-items: center;
+      //   justify-content: center;
+      //   flex-direction: column;
+      //   height: 50%;
+      //   width: 350px;
+      //   background-color: var(--void2);
+      //   margin-left: 980px;
+      //   position: absolute;
+      //   transition: 1s;
+      //   bottom: 0;">
+      //           <div class="desc" style="color: var(--fuschia);
+      //   font-weight: bold;
+      //   font-size: medium;">Quantidade de Escolhas</div>
+      //           <div class="chartJS" style="  border-radius: 10px;
+      //   display: flex;
+      //   justify-content: center;
+      //   align-items: center;
+      //   background-color: var(--stark);
+      //   height: 250px;
+      //   width: 100%;">
+      //             <canvas id="myChart1"></canvas>
+      //           </div>
+      //         </div>
+      //       </div></div> `
+      //       }
+    </script>
+  </body>
+</html>

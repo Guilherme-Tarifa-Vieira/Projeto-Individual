@@ -122,12 +122,19 @@
             console.log(json)
             console.log(JSON.stringify(json))
 
-            sessionStorage.EMAIL_USUARIO = json.emailUsuario
-            sessionStorage.NOME_USUARIO = json.nomeUsuario
-            sessionStorage.ID_USUARIO = json.idUsuario
-
+            sessionStorage.EMAIL_USUARIO = json.email
+            sessionStorage.ID_USUARIO = json.usuario
+            sessionStorage.NOME_USUARIO = json.nome
+            sessionStorage.NOME_PERSONAGEM = json.Personagem
             setTimeout(function () {
-              window.location = './dashboard/dashboard.html'
+            
+              if(sessionStorage.NOME_PERSONAGEM == 'Percy Jackson'){
+
+                window.location = './dashboard/dashboardPercy.html'
+              } else if(sessionStorage.NOME_PERSONAGEM == 'Annabeth Chase' ){
+
+                window.location = './dashboard/dashboardAnnabeth.html'
+              }
             }, 1000) // apenas para exibir o loading
           })
         } else {

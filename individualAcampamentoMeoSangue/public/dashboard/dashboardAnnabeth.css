@@ -12,7 +12,7 @@
   box-sizing: border-box;
   font-family: 'garamond', sans-serif;
   scroll-behavior: smooth;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 /* width */
@@ -48,15 +48,16 @@
 }
 
 .container {
+  display: flex;
+  justify-content: space-between;
   width: 80%;
   margin-left: 10%;
+  align-items: center;
 }
 
 #header {
   width: 100%;
 
-  display: flex;
-  justify-content: space-around;
   align-items: center;
   background-color: var(--void2);
   position: fixed;
@@ -68,6 +69,10 @@
 #header .title {
   font-weight: 600;
   font-size: 32px;
+}
+
+#header span {
+  color: var(--fuschia);
 }
 
 .navLista {
@@ -96,13 +101,20 @@
   text-align: center;
   margin-left: 5px;
   margin-top: 5px;
-  width: 200px;
+  color: var(--stark);
 }
 
 .caLogin {
   display: flex;
   justify-content: space-between;
-  width: 200px;
+}
+
+.caLogin ion-icon {
+  margin: 0;
+  padding: 0;
+  height: 20px;
+  color: var(--fuschia);
+  cursor: pointer;
 }
 
 .btn-grad {
@@ -136,7 +148,7 @@
 }
 
 .banner {
-  background-image: url('assets/img/nico.webp');
+  background-image: url('../assets/img/coruja-bonita-wallpaper.jpg');
   background-size: cover;
   min-height: 100vh;
   min-width: 100vw;
@@ -146,45 +158,42 @@
 }
 
 .boxLogin {
-  box-shadow: rgba(189, 226, 7, 0.4) 5px 5px, rgba(241, 237, 13, 0.3) 10px 10px,
-    rgba(221, 225, 15, 0.2) 15px 15px, rgba(218, 232, 17, 0.1) 20px 20px,
-    rgba(240, 137, 46, 0.05) 25px 25px;
   display: flex;
+  flex-direction: column;
+  padding-left: 5px;
+  padding-right: 5px;
+  justify-content: space-around;
 
-  align-items: center;
-  justify-content: center;
   height: 100%;
   width: 250px;
   background-color: var(--void2);
-  color: var(--stark);
+  margin-left: 150px;
   position: absolute;
   transition: 1s;
+  color: var(--stark);
 }
-
-.alerta_erro {
-  margin-top: -10px;
+.boxLogin .descBemVindo {
+  margin-top: 15px;
+}
+.boxLogin #b_usuario,
+#escolha {
   color: var(--fuschia);
+  text-transform: uppercase;
 }
 
 .boxLogin .card {
-  overflow-x: hidden;
   margin-left: 10px;
 }
-.selectPersonagens {
-  margin-top: 10px;
-  font-size: 18px;
-  background-color: transparent;
-  border: none;
-  color: var(--stark);
-}
-.selectPersonagens option {
-  background-color: var(--fuschia);
-  color: var(--void);
+
+.boxLogin .bannerChale {
+  background-image: url('../assets/img/chaleAtena.jpg');
+  background-size: cover;
+  height: 150px;
+  border-radius: 7px;
+  margin-top: 25px;
 }
 
 form {
-  overflow-x: hidden;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -201,28 +210,29 @@ form input {
   background-color: transparent;
   transition: all 0.2s ease;
 }
-.card.cadastro {
-  overflow: hidden;
-}
-.card.cadastro h2 {
+
+.boxLogin h2 {
   margin-top: 15px px;
   color: var(--fuschia);
 }
 
-.card.cadastro .h2 {
-  width: 14rem;
+.card.login .h2 {
+  width: 19rem;
 }
 
-.card.cadastro form input {
-  color: var(--stark);
-  font-size: 14px;
+.card.login form input {
+  font-size: 16px;
   font-family: poppins, sans-serif;
 }
 
-.card.cadastro form input::placeholder {
+.card.login form input::placeholder {
   color: var(--stark);
   position: relative;
   bottom: 0.5rem;
+}
+
+form label {
+  margin-top: 5px;
 }
 
 form button {
@@ -285,6 +295,78 @@ form p {
 .loading-div img {
   height: 50px;
   width: 50px;
+}
+
+.card.chart {
+  padding: 5px 5px 5px 5px;
+  display: flex;
+  border-radius: 10px 10px 0 0;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 50%;
+  width: 350px;
+  background-color: var(--void2);
+  margin-left: 600px;
+  position: absolute;
+  transition: 1s;
+  bottom: 0;
+}
+
+.card.chart1 {
+  padding: 5px 5px 5px 5px;
+  display: flex;
+  border-radius: 10px 10px 0 0;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 50%;
+  width: 350px;
+  background-color: var(--void2);
+  margin-left: 980px;
+  position: absolute;
+  transition: 1s;
+  bottom: 0;
+}
+.card.chart .chartJS {
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--stark);
+  height: 250px;
+  width: 100%;
+}
+.card.chart .desc {
+  color: var(--fuschia);
+  font-weight: bold;
+  font-size: medium;
+}
+
+.card.chart1 .chartJS {
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--stark);
+  height: 250px;
+  width: 100%;
+}
+.card.chart1 .desc {
+  color: var(--fuschia);
+  font-weight: bold;
+  font-size: medium;
+}
+
+.imgPerso {
+  background-image: url('../assets/img/Annabeth_Chase-Viria-removebg-preview.png');
+  background-size: cover;
+  height: 550px;
+  width: 350px;
+  position: relative;
+
+  bottom: -70px;
+  margin-left: 320px;
 }
 
 .footer {

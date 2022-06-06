@@ -179,6 +179,7 @@ form {
 }
 
 form input {
+  color: var(--stark);
   margin-top: 15px;
   outline: none;
   border: 0;
